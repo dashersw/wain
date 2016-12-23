@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/dashersw/wain/issues"
   },
-  "homepage": "https://github.com/dashersw/wain#readme"
+  "homepage": "https://github.com/dashersw/wain#readme",
+  "dependencies": {
+    "async": "^2.1.4"
+  }
 }
