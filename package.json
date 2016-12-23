@@ -1,0 +1,21 @@
+{
+  "name": "wain",
+  "version": "0.0.1",
+  "description": "A topic-based news aggregator with AI.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dashersw/wain.git"
+  },
+  "keywords": [
+    "news",
+    "discovery",
+    "ai"
+  ],
+  "author": "Armagan Amcalar <armagan@amcalar.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dashersw/wain/issues"
+  },
+  "homepage": "https://github.com/dashersw/wain#readme"
+}
