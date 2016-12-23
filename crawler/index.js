@@ -1,26 +1,48 @@
 var async = require('async');
 var sources = require('./sources.json');
 var request = require('request');
-var htmlToText = require('html-to-text');
+var FeedParser = require('feedparser')
 
-function fetchArticlesFromSource(source) {
-    source.map(handleArticleSource)
-}
-/** 
- * Each feed url handle by this function.
- * @param url Link of Article Feed
- * @returns {?}
- */
-function handleArticleSource(url) {
-    var text;
-    request(url, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            text = htmlToText.fromString(body);
-            console.log(text)
-        } else {
-             // I don't have an idea about handle error
-        }
+
+var sourceList = [];
+Object.keys(sources).map(function (s) {
+    sources[s].map(function (l) {
+        sourceList.push(l)
     })
+})
+
+
+var feeds = [];
+function fetchArticlesFromSource(source, callback) {
+    var req = request(source)
+        , feedparser = new FeedParser({
+            normalize: true
+        });
+
+    req.on('error', function (error) {
+        // handle any request errors
+        callback(error)
+    });
+    
+    req.on('response', function (res) {
+        var stream = this;
+
+        if (res.statusCode != 200) {
+            // handle any response errors
+            callback("Bad Status Code");
+        }
+        else {
+            feeds.push(stream.pipe(feedparser))
+            callback(null)
+        }
+    });
+
 }
 
-async.each(sources, fetchArticlesFromSource);
+async.each(sourceList, fetchArticlesFromSource, function (err) {
+    if (err) {
+        console.log('Failed ~ Reason => ', err);
+    } else {
+        console.log('Success',feeds.length);
+    }
+});
