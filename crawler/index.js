@@ -4,15 +4,7 @@ var request = require('request');
 var FeedParser = require('feedparser')
 
 
-var sourceList = [];
-Object.keys(sources).map(function (s) {
-    sources[s].map(function (l) {
-        sourceList.push(l)
-    })
-})
 
-
-var feeds = [];
 function fetchArticlesFromSource(source, callback) {
     var req = request(source)
         , feedparser = new FeedParser({
@@ -23,7 +15,7 @@ function fetchArticlesFromSource(source, callback) {
         // handle any request errors
         callback(error)
     });
-    
+
     req.on('response', function (res) {
         var stream = this;
 
@@ -32,17 +24,17 @@ function fetchArticlesFromSource(source, callback) {
             callback("Bad Status Code");
         }
         else {
-            feeds.push(stream.pipe(feedparser))
-            callback(null)
+            var feed = stream.pipe(feedparser);
+            callback(null,feed)
         }
     });
 
 }
 
-async.each(sourceList, fetchArticlesFromSource, function (err) {
+async.each(sources, fetchArticlesFromSource, function (err,result) {
     if (err) {
         console.log('Failed ~ Reason => ', err);
     } else {
-        console.log('Success',feeds.length);
+        console.log('Success',result);
     }
-});
+})
