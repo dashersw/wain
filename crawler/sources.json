@@ -1,5 +1,21 @@
 [
-  "https://flipboard.com/@armaganamcalar/the-guild-daily-scfdbe70y?rss",
-  "http://angularjs.blogspot.com/feeds/posts/default",
-  "https://facebook.github.io/react/feed.xml"
+  {
+    "name": "angular",
+    "feeds": [
+      "http://angularjs.blogspot.com/feeds/posts/default"
+    ]
+  },
+  {
+    "name": "react",
+    "feeds": [
+      "https://facebook.github.io/react/feed.xml"
+    ]
+  },
+  {
+    "name": "other",
+    "feeds": [
+      "https://toddmotto.com/feed.xml",
+      "http://flipboard.com/@armaganamcalar/the-guild-daily-scfdbe70y?rss"
+    ]
+  }
 ]
