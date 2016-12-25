@@ -12,6 +12,12 @@
     ]
   },
   {
+    "name": "vuejs",
+    "feeds": [
+      "http://blog.evanyou.me/atom.xml"
+    ]
+  },
+  {
     "name": "other",
     "feeds": [
       "https://toddmotto.com/feed.xml",
